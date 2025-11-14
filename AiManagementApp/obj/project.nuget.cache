@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VYzqvinlVDs=",
+  "dgSpecHash": "UuGVggiGYJY=",
   "success": true,
   "projectFilePath": "/Users/laviniapark/Documents/GS2025/DOTNET/AiManagementApp/AiManagementApp/AiManagementApp.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/Users/laviniapark/.nuget/packages/microsoft.entityframeworkcore/9.0.11/microsoft.entityframeworkcore.9.0.11.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/microsoft.entityframeworkcore.abstractions/9.0.11/microsoft.entityframeworkcore.abstractions.9.0.11.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/microsoft.entityframeworkcore.analyzers/9.0.11/microsoft.entityframeworkcore.analyzers.9.0.11.nupkg.sha512",
+    "/Users/laviniapark/.nuget/packages/microsoft.entityframeworkcore.inmemory/9.0.11/microsoft.entityframeworkcore.inmemory.9.0.11.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/microsoft.entityframeworkcore.relational/9.0.0/microsoft.entityframeworkcore.relational.9.0.0.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/microsoft.extensions.caching.abstractions/9.0.11/microsoft.extensions.caching.abstractions.9.0.11.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/microsoft.extensions.caching.memory/9.0.11/microsoft.extensions.caching.memory.9.0.11.nupkg.sha512",
@@ -21,6 +22,7 @@
     "/Users/laviniapark/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/oracle.entityframeworkcore/9.23.26000/oracle.entityframeworkcore.9.23.26000.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/oracle.manageddataaccess.core/23.26.0/oracle.manageddataaccess.core.23.26.0.nupkg.sha512",
+    "/Users/laviniapark/.nuget/packages/scalar.aspnetcore/2.10.3/scalar.aspnetcore.2.10.3.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/system.configuration.configurationmanager/8.0.0/system.configuration.configurationmanager.8.0.0.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/system.diagnostics.eventlog/8.0.0/system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "/Users/laviniapark/.nuget/packages/system.diagnostics.performancecounter/8.0.0/system.diagnostics.performancecounter.8.0.0.nupkg.sha512",
