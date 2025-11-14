@@ -1,1 +1,84 @@
+###############
+### Build ###
+###############
+
+bin/
+obj/
+out/
+Debug/
+Release/
+TestResults/
+*.log
+
+###############
+### User files ###
+###############
+
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+###############
+### IDE ###
+###############
+
 .idea/
+*.iml
+.vscode/
+*.swp
+*.sublime-workspace
+*.sublime-project
+
+###############
+### macOS ###
+###############
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+###############
+### .NET ###
+###############
+
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.patch
+*.orig
+*.rej
+
+# ASPNET scaffolding
+ScaffoldingReadMe.txt
+
+# Auto-generated assembly info
+**/AssemblyInfo.cs
+**/AssemblyInfo.fs
+**/AssemblyInfo.vb
+
+###############
+### EF Core ###
+###############
+
+*Migrations/*Designer.cs
+*Migrations/*Snapshot.cs
+
+###############
+### Logs / Temp ###
+###############
+
+*.tmp
+*.temp
+*.bak
+*.old
+
+coverage/
+*.coverage
+*.coveragexml
