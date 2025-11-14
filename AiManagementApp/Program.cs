@@ -1,3 +1,4 @@
+using AiManagementApp.Endpoints;
 using AiManagementApp.Infrastructure.Services;
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
@@ -21,6 +22,8 @@ var apiVersionSet = app.NewApiVersionSet()
         new ApiVersion(2, 0)
     })
     .Build();
+
+app.RegisterAiManagementAppEndpoints(apiVersionSet);
 
 app.MapGet("/", () => "Insira na url '/health-ui' para visualizar a saude do Banco")
     .WithName("Introdução")

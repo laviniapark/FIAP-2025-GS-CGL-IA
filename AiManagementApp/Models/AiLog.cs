@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AiManagementApp.Models;
 
+    [Table("TBL_AI_LOGS")]
     public class AiLog
     {
         [Column("log_id")]
