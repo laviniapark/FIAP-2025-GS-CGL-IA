@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace AiManagementApp.Infrastructure;
 
-public class AiManagementDbFactory : IDesignTimeDbContextFactory<AiManagementDb>
+public class AiManagementAppDbFactory : IDesignTimeDbContextFactory<AiManagementAppDb>
 {
-    public AiManagementDb CreateDbContext(string[] args)
+    public AiManagementAppDb CreateDbContext(string[] args)
     {
         var basePath = Directory.GetCurrentDirectory();
         
@@ -20,10 +20,10 @@ public class AiManagementDbFactory : IDesignTimeDbContextFactory<AiManagementDb>
             ?? throw new InvalidOperationException(
                 "Connection string 'Default Connection' ausente para design-time");
         
-        var options = new DbContextOptionsBuilder<AiManagementDb>()
+        var options = new DbContextOptionsBuilder<AiManagementAppDb>()
             .UseOracle(cs)
             .Options;
         
-        return new AiManagementDb(options);
+        return new AiManagementAppDb(options);
     }
 }

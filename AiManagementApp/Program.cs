@@ -1,41 +1,51 @@
+using AiManagementApp.Infrastructure.Services;
+using Asp.Versioning;
+using Asp.Versioning.Conventions;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Scalar.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-    builder.Services.AddOpenApi();
+builder.Services.RegisterAiManagementAppServices(
+    builder.Configuration,
+    builder.Environment);
 
-    var app = builder.Build();
+builder.Services.AddOpenApi();
 
-// Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.MapOpenApi();
-    }
+var app = builder.Build();
 
-    app.UseHttpsRedirection();
-
-    var summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-    app.MapGet("/weatherforecast", () =>
-    {
-        var forecast = Enumerable.Range(1, 5).Select(index =>
-            new WeatherForecast
-                (
-                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                Random.Shared.Next(-20, 55),
-                summaries[Random.Shared.Next(summaries.Length)]
-                ))
-            .ToArray();
-        return forecast;
+var apiVersionSet = app.NewApiVersionSet()
+    .HasApiVersions(new List<ApiVersion> {
+        new ApiVersion(1, 0),
+        new ApiVersion(2, 0)
     })
-        .WithName("GetWeatherForecast");
+    .Build();
 
-    app.Run();
+app.MapGet("/", () => "Insira na url '/health-ui' para visualizar a saude do Banco")
+    .WithName("Introdução")
+    .WithApiVersionSet(apiVersionSet)
+    .MapToApiVersion(1,0);
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+app.MapHealthChecks("/health", new HealthCheckOptions()
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    Predicate = _ => true,
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+})
+    .WithName("Health Check")
+    .WithTags("Health Check Endpoint");
+
+app.UseStaticFiles();
+
+app.MapHealthChecksUI(options =>
+{
+    options.UIPath = "/health-ui";
+});
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
 }
+
+app.Run();

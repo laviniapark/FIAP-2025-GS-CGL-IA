@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AiManagementApp.Infrastructure;
 
-public class AiManagementDb: DbContext
+public class AiManagementAppDb: DbContext
 {
     public DbSet<AiLog> AiLogs { get; set; }
     
-    public AiManagementDb(DbContextOptions<AiManagementDb> options) : base(options){}
+    public AiManagementAppDb(DbContextOptions<AiManagementAppDb> options) : base(options){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AiManagementDb).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AiManagementAppDb).Assembly);
         }
 }
