@@ -165,7 +165,158 @@ dotnet restore
 dotnet run --project AiManagementApp
 ```
 
-> 🔗 **URL gerada:** copie a exibida no console (exemplo: `http://localhost:5017`)
+> 🔗 **URL gerada:** copie a exibida no console (exemplo: `http://localhost:5107`)
 
 ## Efetuando Testes no Sistema
 
+### Visão Geral dos Endpoints
+
+Abra a URL gerada pelo .NET e acesse o Scalar: `http://localhost:5107/scalar`
+
+> 💡 **Dica:** No Scalar você pode visualizar todos os endpoints, métodos disponíveis e exemplos de requisição/retorno
+
+![Scalar](/docs/images/scalar.png)
+
+---
+
+### 1. Verificar Saúde do Sistema
+
+O endpoint de Health Check confirma se a aplicação e o banco Oracle estão ativos: `http://localhost:5107/health-ui`
+
+![Health Resposta](/docs/images/health-ui.png)
+
+> Tanto ✅ quanto o "Healthy" mostram que a comunicaçao com o banco está saudável 
+
+---
+
+### 2. Executar Testes Unitários
+
+Após verificar que o servidor está saudável, você pode rodar os **testes unitários** para validar a lógica principal da aplicação.
+
+> 💡 **Os testes foram desenvolvidos utilizando o framework xUnit**, cobrindo os principais fluxos de CRUD e validações internas.
+
+#### ▶️ Rodando os testes
+Na raiz do projeto, execute o comando abaixo:
+
+```bash
+dotnet test
+```
+
+Isso irá:
+- Restaurar automaticamente os pacotes necessários;
+- Compilar o projeto e os testes;
+- Executar todos os casos de teste definidos na pasta `AiManagementApp.Tests`.
+
+#### 📊 Resultados esperados
+Ao final da execução, o terminal exibirá um resumo semelhante a:
+
+```
+Resumo do teste: total: 4; falhou: 0; bem-sucedido: 4; ignorado: 0; duração: 9,8s
+```
+> ✅ Se todos os testes passarem, significa que a lógica principal da API está funcionando conforme o esperado
+
+---
+
+### (Opcional) Executar Testes Manuais (API Client)
+
+Nesta etapa, você pode testar os endpoints manualmente utilizando **Insomnia** ou **Postman**, seguindo o mesmo comportamento dos testes automatizados.
+
+#### 1. **Verificar Registros Cadastrados (GET ALL)**
+
+Assim que a Migration for executada, o sistema já cria **6 registros iniciais** na tabela de Logs.
+Para listar, use:
+
+```
+GET http://localhost:5107/api/v1/ai-logs?PageNumber=1&PageSize=2
+```
+
+> ⚙️ **Parâmetros:**
+> - `PageNumber` = número da página (use `1` por padrão)
+> - `PageSize` = quantidade de registros exibidos por página
+
+📸 *Exemplo de resposta:*
+
+![GET ALL RESPONSE](/docs/images/getall.png)
+
+> 📑 As respostas são paginadas e estruturadas conforme o padrão HATEOAS, fornecendo links de navegação e ações relacionadas ao recurso consultado
+
+---
+
+#### 2. Buscar Registro Específico (GET by ID)
+```
+GET http://localhost:5107/api/v1/ai-logs/{id}
+```
+> 🔎 Substitua `{id}` por um ID retornado no GET anterior
+
+📸 *Exemplo de resposta:*
+
+![GETBYID RESPONSE](/docs/images/getbyid.png)
+
+---
+
+#### 3. Cadastrar Novo Registro (POST)
+```
+POST http://localhost:5107/api/v1/ai-logs
+```
+Insira o seguinte JSON de exemplo no body da requisição:
+
+```json
+{
+  "dhRequisicao": "2025-11-14T12:30:00",
+  "resumoRecebido": "Usuário comentou que acordou cansado e teve dificuldade para se concentrar nas primeiras tarefas do dia.",
+  "recomendacaoGerada": "Tente fazer uma pausa curta para recarregar a mente. Respirar profundamente por alguns minutos ou caminhar um pouco pode ajudar a recuperar o foco. Lembre-se de avançar aos poucos, sem se cobrar além do necessário.",
+  "nivel": 0,
+  "sucessoEnvio": true
+}
+```
+📸 *Exemplo de resposta 201 (criação bem-sucedida):*
+
+![POST RESPONSE](/docs/images/post.png)
+
+---
+
+#### 4. Atualizar Registro Existente (PUT)
+```
+PUT http://localhost:5107/api/v1/ai-logs/{id}
+```
+> ✏️ Copie o JSON atual e altere apenas os campos desejados (**não inclua o id na requisição**)
+
+📸 *Exemplo de resposta:*
+
+![PUT RESPONSE](/docs/images/put.png)
+
+---
+
+#### 5. Deletar Registro (DELETE)
+```
+DELETE http://localhost:5107/api/v1/ai-logs/{id}
+```
+
+📸 *Exemplo de resposta:*
+
+![DELETE RESPONSE](/docs/images/delete.png)
+
+---
+
+#### **Bônus** - Visualizar retorno da IA
+```
+GET http://localhost:5107/api/v1/ai/teste
+```
+> Esse método utiliza um dado mockado em seu próprio método para receber um exemplo de resposta da IA, sendo utilizado para testes locais.
+
+*Dado Mockado*
+```
+resumoRecebido: "Estou meio cansada hoje"
+nivel: 0
+```
+
+📸 *Resposta recebida:*
+
+![TEST GET RESPONSE](/docs/images/getteste.png)
+
+
+**✅ Resumo:**
+
+O Lyra AI Management consolida práticas modernas de desenvolvimento com .NET, aplicando conceitos de Clean Architecture, versionamento de APIs, observabilidade e documentação inteligente.
+
+Integrando IA generativa ao fluxo principal da aplicação, o serviço entrega uma experiência confiável, modular e de fácil manutenção, refletindo um design maduro e pronto para ambientes reais.
