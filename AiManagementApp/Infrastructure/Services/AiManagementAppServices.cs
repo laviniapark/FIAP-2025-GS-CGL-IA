@@ -104,5 +104,11 @@ public static class AiManagementAppServices
         services.AddHealthChecksUI().AddInMemoryStorage();
         
         #endregion
+
+        #region AI Service
+
+        services.AddScoped<IAiService, GeminiAiService>();
+
+        #endregion
     }
 }

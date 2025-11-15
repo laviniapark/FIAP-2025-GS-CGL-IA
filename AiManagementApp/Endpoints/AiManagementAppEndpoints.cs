@@ -12,6 +12,7 @@ public static class AiManagementAppEndpoints
             .WithTags("Lyra AI Endpoints V1");
 
         v1Group.MapAiLogEndpoints("V1");
+        v1Group.MapGeminiAiEndpoints("V1");
         
         // Mantido para uma possível futura alteração
         var v2Group = app.MapGroup("/api/v2")

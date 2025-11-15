@@ -64,6 +64,10 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "Google.GenAI": {
+              "target": "Package",
+              "version": "[0.5.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.9, )"
